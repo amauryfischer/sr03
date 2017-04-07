@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="UTF-8">
@@ -15,15 +17,13 @@
     
     <div class="col-md-4">
       <section class="login-form">
-        <form method="post" action="login.js" role="login">
+        <form method="post" action="login.jsp" role="login">
           <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
           <input type="email" name="email" placeholder="Email" required class="form-control input-lg" value="login" />
           
           <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
-          
-          
+                   
           <div class="pwstrength_viewport_progress"></div>
-          
           
           <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
           <div>
