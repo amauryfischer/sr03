@@ -15,17 +15,60 @@ CREATE TABLE ideas (
   comment_ids integer ARRAY[100],
   scientist_id integer,
   domain_ids integer ARRAY[10]
-)
+);
 
 CREATE TABLE comments (
   id serial PRIMARY KEY,
   scientist_id integer,
   date date,
   idea_id integer,
-)
+  content text
+);
 
-CREATE TABLE domain (
+CREATE TABLE domains (
   id serial PRIMARY KEY,
   title text,
   description text
-)
+);
+
+-- domain insertion
+
+INSERT INTO domains (title,description)
+VALUES ( 'Mathématiques', 'les maths c est vraimment trop trop bien' );
+
+INSERT INTO domains (title,description)
+VALUES ( 'Informatique', 'l informatique c est encore mieux');
+
+INSERT INTO domains (title,description)
+VALUES ('Biologie','c est l etude des etres vivants');
+
+INSERT INTO domains (title,description)
+VALUES ('Ménage','il s agit de nettoyer');
+
+-- scientists insertion
+
+INSERT INTO scientists (name,pwd,domain_ids,idea_ids,comment_ids)
+VALUES ('Kevin','azerty','{3,4}','{1}','{1}');
+
+INSERT INTO scientists (name,pwd,domain_ids,idea_ids,comment_ids)
+VALUES ('Amaury','dodo','{1,2,4}','{2}','{2}');
+
+-- ideas insertion
+
+INSERT INTO ideas (title,content,created_at,comment_ids,scientist_id,domain_ids)
+VALUES ('slip vegetale 100% recyclable','le slip vegetale est vraimment vegetale. Il est bio degradable, et ecologique et user friendly il s adapte aux besoins de chacun afin d optimiser l ergonomie','05 Dec 2017','{2}',1,'{3}');
+
+INSERT INTO ideas (title,content,created_at,comment_ids,scientist_id,domain_ids)
+VALUES('fusion nucleaire','la nouvelle solution energetique de demain, biodegradable','07 Dec 2017','{1}',2,'{1,2}');
+-- comment insertion
+
+INSERT INTO comments (scientist_id,date,idea_id,content)
+VALUES (1,'08 Dec 2017',2,'Je pense que ton idee est genial');
+
+INSERT INTO comments (scientist_id,date,idea_id,content)
+VALUES (2,'13 Dec 2017',1,'je pense que ton idee est pourrie');
+
+-- DROP TABLE COMMENTS;
+-- DROP TABLE SCIENTISTS;
+-- DROP TABLE IDEAS;
+-- DROP TABLE DOMAINS;
