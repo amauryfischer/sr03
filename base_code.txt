@@ -1,3 +1,4 @@
+-- CREATE USER toto2 WITH PASSWORD 'azerty';
 CREATE TABLE scientists (
    id serial PRIMARY KEY,
    name text,
@@ -72,3 +73,4 @@ VALUES (2,'13 Dec 2017',1,'je pense que ton idee est pourrie');
 -- DROP TABLE SCIENTISTS;
 -- DROP TABLE IDEAS;
 -- DROP TABLE DOMAINS;
+-- GRANT ALL ON IDEAS TO toto2;
