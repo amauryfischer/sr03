@@ -1,6 +1,7 @@
 package com.javaids.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 /**
  * Servlet implementation class PageLogin
  */
-@WebServlet("/addcomment")
+@WebServlet("/comments")
 public class PageLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,14 +41,22 @@ public class PageLogin extends HttpServlet {
 		String url = "jdbc:postgresql://localhost:5432/sr03";
         String user = "toto2";
         String password = "azerty";
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print("welcome");
+        String firstName = request.getParameter("fname");
+        printWriter.print(firstName);
         try {
 	        String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES (50,'30 Dec 2017',1,'COOOOOOOOOOOOOL');";
 	        String query2 = "SELECT * FROM comments;";
 	        con = DriverManager.getConnection(url, user, password);
 	        st = con.createStatement();
 	        rs = st.executeQuery(query2);
-            if (rs.next()) {
-                System.out.println(rs.getString("date"));
+            while (rs.next()) {
+            	printWriter.print(rs.getString(1));
+            	printWriter.print(rs.getString(2));
+            	printWriter.print(rs.getString(3));
+            	printWriter.print(rs.getString(4));
+            	printWriter.print(rs.getString(5));
             }
         } catch (SQLException ex) {
         	System.out.println(ex);
