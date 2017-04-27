@@ -42,22 +42,29 @@ public class PageLogin extends HttpServlet {
         String user = "toto2";
         String password = "azerty";
         PrintWriter printWriter = response.getWriter();
-        printWriter.print("welcome");
-        String firstName = request.getParameter("fname");
-        printWriter.print(firstName);
+        printWriter.print("<!DOCTYPE html>");
+        printWriter.print("<html>");
+        printWriter.print("<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+        printWriter.print("<title>Session Test Servlet</title></head><body>");
+        printWriter.print("List of comments");
+        //String firstName = request.getParameter("fname");
+        //printWriter.print(firstName);
         try {
-	        String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES (50,'30 Dec 2017',1,'COOOOOOOOOOOOOL');";
+	        //String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES (50,'30 Dec 2017',1,'COOOOOOOOOOOOOL');";
 	        String query2 = "SELECT * FROM comments;";
 	        con = DriverManager.getConnection(url, user, password);
 	        st = con.createStatement();
 	        rs = st.executeQuery(query2);
             while (rs.next()) {
-            	printWriter.print(rs.getString(1));
-            	printWriter.print(rs.getString(2));
-            	printWriter.print(rs.getString(3));
-            	printWriter.print(rs.getString(4));
-            	printWriter.print(rs.getString(5));
+            	printWriter.print("<p>");
+            	printWriter.print("<br/>id : " + rs.getString(1));
+            	printWriter.print("<br/>scientist_id : " + rs.getString(2));
+            	printWriter.print("<br/>date : " + rs.getString(3));
+            	printWriter.print("<br/>idea_id :" + rs.getString(4));
+            	printWriter.print("<br/>content :" + rs.getString(5));
+            	printWriter.print("</p>");
             }
+            printWriter.print("</body></html>");
         } catch (SQLException ex) {
         	System.out.println(ex);
             /*Logger lgr = Logger.getLogger(Version.class.getName());
@@ -89,8 +96,57 @@ public class PageLogin extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+		String url = "jdbc:postgresql://localhost:5432/sr03";
+        String user = "toto2";
+        String password = "azerty";
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print("<!DOCTYPE html>");
+        printWriter.print("<html>");
+        printWriter.print("<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
+        printWriter.print("<title>Session Test Servlet</title></head><body>");
+        String scientistId = request.getParameter("scientist_id");
+        String date = request.getParameter("date");
+        date = "13 Dec 2017";
+        String ideaId = request.getParameter("idea_id");
+        String content = request.getParameter("content");
+        //printWriter.print(firstName);
+        try {
+	        String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES ("+scientistId +",'"+date+"',"+ideaId+",'"+content+"');";
+	        String query2 = "INSERT INTO comments  VALUES (2,'13 Dec 2017',1,'je pense donc je suis'); ";
+	        con = DriverManager.getConnection(url, user, password);
+	        st = con.createStatement();
+	        rs = st.executeQuery(query1);
+            while (rs.next()) {
+            }
+            printWriter.print("</body></html>");
+        } catch (SQLException ex) {
+        	System.out.println(ex);
+            /*Logger lgr = Logger.getLogger(Version.class.getName());
+            lgr.log(Level.SEVERE, ex.getMessage(), ex);*/
+
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+
+            } catch (SQLException ex) {
+                /*Logger lgr = Logger.getLogger(Version.class.getName());*/
+                /*lgr.log(Level.WARNING, ex.getMessage(), ex);*/
+            }
+        }
+        
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 }
