@@ -13,6 +13,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -107,14 +109,13 @@ public class PageLogin extends HttpServlet {
         printWriter.print("<html>");
         printWriter.print("<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
         printWriter.print("<title>Session Test Servlet</title></head><body>");
-        String scientistId = request.getParameter("scientist_id");
-        String date = request.getParameter("date");
-        date = "13 Dec 2017";
-        String ideaId = request.getParameter("idea_id");
+        String scientistId = request.getParameter("scientistId");
+        Date current_date = Calendar.getInstance().getTime();
+        String ideaId = request.getParameter("ideaId");
         String content = request.getParameter("content");
         //printWriter.print(firstName);
         try {
-	        String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES ("+scientistId +",'"+date+"',"+ideaId+",'"+content+"');";
+	        String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES ("+scientistId +",'"+current_date+"',"+ideaId+",'"+content+"');";
 	        String query2 = "INSERT INTO comments  VALUES (2,'13 Dec 2017',1,'je pense donc je suis'); ";
 	        con = DriverManager.getConnection(url, user, password);
 	        st = con.createStatement();

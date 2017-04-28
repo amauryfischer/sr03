@@ -23,7 +23,6 @@
             <label class=" control-label" for="passwordinput">Comment-ids</label>
             <div class="">
               <input id="passwordinput" name="commentIds" placeholder="Comment-ids" class="form-control input-md" type="password">
-              <span class="help-block">help</span>
             </div>
           </div>
           
@@ -32,7 +31,6 @@
             <label class=" control-label" for="passwordinput">Scientist-id</label>
             <div class="">
               <input id="passwordinput" name="scientistId" placeholder="Scientist-id" class="form-control input-md" type="password">
-              <span class="help-block">help</span>
             </div>
           </div>
           
@@ -41,7 +39,6 @@
             <label class=" control-label" for="passwordinput">Domain-ids</label>
             <div class="">
               <input id="passwordinput" name="domainIds" placeholder="Domain-ids" class="form-control input-md" type="password">
-              <span class="help-block">help</span>
             </div>
           </div>
 
