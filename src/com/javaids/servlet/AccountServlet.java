@@ -86,6 +86,8 @@ public class AccountServlet extends HttpServlet {
             }
         }
         
+        response.sendRedirect("/sr03/page_login.jsp");
+        
 	}
 
 }
