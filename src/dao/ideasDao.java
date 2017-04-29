@@ -21,9 +21,11 @@ public class ideasDao {
 		 */
 
 		List<idea> lu = new ArrayList<idea>();
+
 		Connection cnx=null;
 		try {
 			cnx = ConnexionBDD.getInstance().getCnx();
+	
 			// ou Class.forName(com.mysql.jdbc.Driver.class.getName());
 
 			
@@ -45,7 +47,8 @@ public class ideasDao {
 			}
 			
 			res.close();
-			ConnexionBDD.getInstance().closeCnx();			
+			ConnexionBDD.getInstance().closeCnx();
+	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

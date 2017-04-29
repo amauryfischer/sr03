@@ -12,11 +12,10 @@ public class ConnexionBDD {
 	
 	private ConnexionBDD() {
 		try {
-			
+	
 			Properties p = new Properties();
-			p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("confBDD.properties"));
-			
-			
+
+			p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("confBDD.properties"));//Erreur ici  java.lang.NullPointerException ??? >0<
 				
 			// chargement du driver
 			//Class.forName(p.getProperty("driver"));
@@ -25,8 +24,9 @@ public class ConnexionBDD {
 	
 			Class.forName("org.postgresql.Driver");  
 			//cnx=DriverManager.getConnection("jdbc:mysql://localhost:3306/formation","root","");
+
 			cnx=DriverManager.getConnection("jdbc:postgresql://localhost:5432/sr03","toto2","azerty"); 			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}catch (ClassNotFoundException e) {
@@ -38,6 +38,7 @@ public class ConnexionBDD {
 	} 
 	
 	public static synchronized ConnexionBDD getInstance() {
+
 		if(instance==null)
 			instance = new ConnexionBDD();
 		
@@ -45,6 +46,7 @@ public class ConnexionBDD {
 	}
 
 	public Connection getCnx() {
+
 		return cnx;
 	}
 
