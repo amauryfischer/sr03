@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>New comment</title>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
             </div>
           </div>
           
-                    <!-- Password input-->
+          <!-- Password input-->
           <div class="form-group">
             <label class=" control-label" for="passwordinput">Idea-id</label>
             <div class="">

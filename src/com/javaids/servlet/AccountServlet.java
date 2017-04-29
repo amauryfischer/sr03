@@ -1,14 +1,14 @@
 package com.javaids.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
-import java.util.Date;
+//import java.util.Calendar;
+//import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,12 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IdeasServlet
+ * Servlet implementation class AccountServlet
  */
-@WebServlet("/ideas")
-public class IdeasServlet extends HttpServlet {
+@WebServlet("/AccountServlet")
+public class AccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -39,37 +39,30 @@ public class IdeasServlet extends HttpServlet {
         Statement st = null;
         ResultSet rs = null;
         
-        //Db connection init
-		String url = "jdbc:postgresql://localhost:5432/sr03";
+      //Db connection init
+  		String url = "jdbc:postgresql://localhost:5432/sr03";
         String user = "toto2";
         String password = "azerty";
         
-        PrintWriter printWriter = response.getWriter();
+      //  PrintWriter printWriter = response.getWriter();
         
-        //printwrite beginning of document
-        printWriter.print("<!DOCTYPE html>");
-        printWriter.print("<html>");
-        printWriter.print("<head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>");
-        printWriter.print("<title>Session Test Servlet</title></head><body>");
+      //retrieve post params
+        String newName = request.getParameter("newName");
+        String newPassword = request.getParameter("newPassword");
+        String domain_ids = request.getParameter("domain_ids");
+        String comment_ids = "";
         
-        //retrieve post params
-        String title = request.getParameter("title");
-        String comment_ids = request.getParameter("commentIds");
-        String scientist_id = request.getParameter("scientistId");
-        String domain_ids = request.getParameter("domainIds");
-        String content = request.getParameter("content");
-        Date current_date = Calendar.getInstance().getTime();
-        
-        //printWriter.print(firstName);
         try {
-	        String query1 = "INSERT INTO ideas (title,content,created_at,comment_ids,scientist_id,domain_ids) VALUES ('"+title+"','"+content+"','"+current_date+"','{"+comment_ids+"}','"+scientist_id+"','{"+domain_ids+"}');";
+	        String query1 = "INSERT INTO scientists (name,pwd,domain_ids) VALUES ('" + newName + "','" + newPassword + "','{" + domain_ids + "}');";
+	      
+	        System.out.println(query1);
 	        
 	        con = DriverManager.getConnection(url, user, password);
 	        st = con.createStatement();
 	        rs = st.executeQuery(query1);
             while (rs.next()) {
             }
-           
+
         } catch (SQLException ex) {
         	System.out.println(ex);
             /*Logger lgr = Logger.getLogger(Version.class.getName());
@@ -92,13 +85,7 @@ public class IdeasServlet extends HttpServlet {
                 /*lgr.log(Level.WARNING, ex.getMessage(), ex);*/
             }
         }
-	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        
 	}
 
 }
