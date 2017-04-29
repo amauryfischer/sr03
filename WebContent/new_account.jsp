@@ -13,6 +13,7 @@
 	<div class="container auth">
 	 <div id="big-form" class="well auth-box">
 		 <form name = "newAccount" method="post" action="AccountServlet">
+		 <input type="hidden" name="formType" id="formType" value="newAccount">
 		 	<fieldset>
 		 	 <!-- Form Name -->
 		 	<legend>Créer une nouvelle Compte </legend>

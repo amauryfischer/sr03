@@ -1,6 +1,7 @@
 package com.javaids.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 //import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,20 +48,41 @@ public class AccountServlet extends HttpServlet {
       //  PrintWriter printWriter = response.getWriter();
         
       //retrieve post params
-        String newName = request.getParameter("newName");
-        String newPassword = request.getParameter("newPassword");
-        String domain_ids = request.getParameter("domain_ids");
-        String comment_ids = "";
+        String formType=request.getParameter("formType");
+        String query1="";
+        int nb_scientists=0;
         
-        try {
-	        String query1 = "INSERT INTO scientists (name,pwd,domain_ids) VALUES ('" + newName + "','" + newPassword + "','{" + domain_ids + "}');";
-	      
-	        System.out.println(query1);
+        if(formType.equals("newAccount")){
+	        String newName = request.getParameter("newName");
+	        String newPassword = request.getParameter("newPassword");
+	        String domain_ids = request.getParameter("domain_ids");
+	        String comment_ids = "";
+	        query1 = "INSERT INTO scientists (name,pwd,domain_ids) VALUES ('" + newName + "','" + newPassword + "','{" + domain_ids + "}');";
+        }else if(formType.equals("signIn")){
+        	String userName = request.getParameter("login");
+        	String userPassword = request.getParameter("password");
+	        query1 = "SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name='"+ userName +"' AND pwd='"+ userPassword +"';";
+        }
+        
+        try {     
+	        System.out.println("query1 = "+query1);
 	        
 	        con = DriverManager.getConnection(url, user, password);
 	        st = con.createStatement();
 	        rs = st.executeQuery(query1);
-            while (rs.next()) {
+	        
+	        while (rs.next()) {
+	        	
+	        	 nb_scientists=Integer.parseInt( rs.getString(1));
+	        	 System.out.println("nb_scientists=" + nb_scientists);
+	        	 
+	        	if(nb_scientists>0){
+	        		response.sendRedirect("/sr03/page_accueil.jsp");
+	        	//}else{
+	        		//PrintWriter printWriter = response.getWriter();
+	        		//printWriter.print("<script type=\"text/javascript\">alert(\"Sign in failed.\");</script>");
+	        	}
+	        	
             }
 
         } catch (SQLException ex) {

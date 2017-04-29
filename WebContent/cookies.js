@@ -11,7 +11,6 @@
 		// Set the cookie to the name, value, and expiration date
 		document.cookie = name + "=" + value + expires + "; path=/";
 		
-		alert("Cookie writed: " + name + "=" + value);
 	}
 
 	function readCookie(name) {

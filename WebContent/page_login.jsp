@@ -17,7 +17,6 @@
 			if(navigator.cookieEnabled){
 				userName = readCookie("ideePartage_userName");
 				password = readCookie("ideePartage_password");
-				alert("fin readCookie : userName= " + userName + ", password=" + password);
 				
 			}
 			
@@ -42,7 +41,6 @@
 				//writeCookie: la nom de l'info, contenu, jours rester dans cookie
 				writeCookie("ideePartage_userName", userName, 10);
 				writeCookie("ideePartage_password", password, 10);
-				alert("fin writeCookie : userName= " + userName + ", psd=" + password);
 			}
 			
 		}
@@ -57,11 +55,12 @@
 	    
 	    <div class="col-md-4">
 	      <section class="login-form">
-	        <form method="post" role="login" action="#" >
+	        <form method="post" role="login" action="AccountServlet" >
 	          <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+	          <input type="hidden" name="formType" id="formType" value="signIn">
 	          <input type="text" name="login" id="login" placeholder="Email" required class="form-control input-lg"  />
 	          
-	          <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
+	          <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password" required="" />
 	                   
 	          <div class="pwstrength_viewport_progress"></div>
 	          
