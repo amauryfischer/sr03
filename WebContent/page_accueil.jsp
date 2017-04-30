@@ -66,7 +66,17 @@
 </tr>
 -->
 
-<a href="GestionIdeas">Id</a>
+<a href="GestionIdeas">Afficher tous les idees</a>
+	<tr>
+				<td>Id</td>
+				<td>Title</td>
+				<td>Content</td>
+				<td>CreatedAt</td>
+				<td>CommentIds</td>
+				<td>ScientistId</td>
+						
+				
+	</tr>
 	<%
 		Object obj = request.getAttribute("listeIdeas");
 		if(obj!=null){

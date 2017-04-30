@@ -12,9 +12,8 @@ public class ConnexionBDD {
 	
 	private ConnexionBDD() {
 		try {
-	
+			
 			Properties p = new Properties();
-
 			p.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("confBDD.properties"));//Erreur ici  java.lang.NullPointerException ??? >0<
 				
 			// chargement du driver
