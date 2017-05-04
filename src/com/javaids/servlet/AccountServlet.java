@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.createMD5;
+
 /**
  * Servlet implementation class AccountServlet
  */
@@ -56,11 +58,15 @@ public class AccountServlet extends HttpServlet {
 	        String newName = request.getParameter("newName");
 	        String newPassword = request.getParameter("newPassword");
 	        String domain_ids = request.getParameter("domain_ids");
-	        String comment_ids = "";
+	        
+	        //crypto
+	        newPassword=createMD5.getMd5(newPassword);
+	        
+	        
 	        query1 = "INSERT INTO scientists (name,pwd,domain_ids) VALUES ('" + newName + "','" + newPassword + "','{" + domain_ids + "}');";
         }else if(formType.equals("signIn")){
         	String userName = request.getParameter("login");
-        	String userPassword = request.getParameter("password");
+        	String userPassword = createMD5.getMd5(request.getParameter("password"));
 	        query1 = "SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name='"+ userName +"' AND pwd='"+ userPassword +"';";
         }
         
