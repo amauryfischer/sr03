@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -115,11 +116,14 @@ public class PageLogin extends HttpServlet {
         String content = request.getParameter("content");
         //printWriter.print(firstName);
         try {
-	        String query1 = "INSERT INTO comments (scientist_id,date,idea_id,content) VALUES ("+scientistId +",'"+current_date+"',"+ideaId+",'"+content+"');";
-	        String query2 = "INSERT INTO comments  VALUES (2,'13 Dec 2017',1,'je pense donc je suis'); ";
-	        con = DriverManager.getConnection(url, user, password);
-	        st = con.createStatement();
-	        rs = st.executeQuery(query1);
+        	con = DriverManager.getConnection(url, user, password);
+        	PreparedStatement pstmt = con.prepareStatement("insert into comments (scientist_id,date,idea_id,content) VALUES (?,?,?,?)");
+        	pstmt.setInt(1, Integer.parseInt(scientistId));
+        	pstmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+        	pstmt.setInt(3, Integer.parseInt(ideaId));
+        	pstmt.setString(4, content);
+        	pstmt.executeUpdate();
+	        rs = pstmt.executeQuery();
             while (rs.next()) {
             }
             printWriter.print("</body></html>");

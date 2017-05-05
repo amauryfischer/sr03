@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="login.css">
+  
   
 </head>
 <body>
@@ -22,8 +24,8 @@
     </div>
     <div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#">iOS</a></li>
-            <li><a href="#">SVN</a></li>
+           <!-- <li class="active"><a href="ideas">Ajouter idee</a></li>
+             <li><a href="#">Ajouter Comment</a></li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Java
@@ -39,6 +41,7 @@
                     <li><a href="#"> </a></li>
                 </ul>
             </li>
+              -->
         </ul>
     </div>
     </div>
@@ -53,7 +56,7 @@
 </div>
 
 
-<table border="1">
+<table border="1"  >
 <!--  
 <tr>
 	<th>ID</th>
