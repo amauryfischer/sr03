@@ -2,9 +2,11 @@ package com.javaids.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Array;
 //import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//import beans.createMD5;
+import beans.createMD5;
 
 /**
  * Servlet implementation class AccountServlet
@@ -39,7 +41,7 @@ public class AccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection con = null;
-        Statement st = null;
+		PreparedStatement pstmt = null;
         ResultSet rs = null;
         
       //Db connection init
@@ -54,29 +56,32 @@ public class AccountServlet extends HttpServlet {
         String query1="";
         int nb_scientists=0;
         
-        if(formType.equals("newAccount")){
-	        String newName = request.getParameter("newName");
-	        String newPassword = request.getParameter("newPassword");
-	        String domain_ids = request.getParameter("domain_ids");
-	        
-	        //crypto
-	        //newPassword=createMD5.getMd5(newPassword);
-	        
-	        
-	        query1 = "INSERT INTO scientists (name,pwd,domain_ids) VALUES ('" + newName + "','" + newPassword + "','{" + domain_ids + "}');";
-        }else if(formType.equals("signIn")){
-        	String userName = request.getParameter("login");
-        	//String userPassword = createMD5.getMd5(request.getParameter("password"));
-        	String userPassword = request.getParameter("password");
-	        query1 = "SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name='"+ userName +"' AND pwd='"+ userPassword +"';";
-        }
+
         
-        try {     
-	        System.out.println("query1 = "+query1);
+        try {
+        	con = DriverManager.getConnection(url, user, password);
+            if(formType.equals("newAccount")){
+    	        String newName = request.getParameter("newName");
+    	        String newPassword = request.getParameter("newPassword");
+    	        String [] domain_ids = { request.getParameter("domain_ids") };
+    	        Array domain_ids_array = con.createArrayOf("NUMERIC", domain_ids);
+    	        //crypto
+    	        newPassword=createMD5.getMd5(newPassword);
+    	        
+    	        pstmt = con.prepareStatement("insert into scientists (name,pwd,domain_ids) VALUES (?,?,?)");
+    	        pstmt.setString(1, newName);
+    	        pstmt.setString(2, newPassword);
+            	pstmt.setArray(3, domain_ids_array);
+            	
+            }else if(formType.equals("signIn")){
+            	String userName = request.getParameter("login");
+            	String userPassword = createMD5.getMd5(request.getParameter("password"));
+            	pstmt = con.prepareStatement("SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name=? AND pwd=?;");
+    	        pstmt.setString(1, userName);
+    	        pstmt.setString(2, userPassword);
+            }
 	        
-	        con = DriverManager.getConnection(url, user, password);
-	        st = con.createStatement();
-	        rs = st.executeQuery(query1);
+	        rs = pstmt.executeQuery();
 	        
 	        while (rs.next()) {
 	        	
@@ -102,8 +107,8 @@ public class AccountServlet extends HttpServlet {
                 if (rs != null) {
                     rs.close();
                 }
-                if (st != null) {
-                    st.close();
+                if (pstmt != null) {
+                	pstmt.close();
                 }
                 if (con != null) {
                     con.close();

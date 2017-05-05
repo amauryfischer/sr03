@@ -119,10 +119,9 @@ public class PageLogin extends HttpServlet {
         	con = DriverManager.getConnection(url, user, password);
         	PreparedStatement pstmt = con.prepareStatement("insert into comments (scientist_id,date,idea_id,content) VALUES (?,?,?,?)");
         	pstmt.setInt(1, Integer.parseInt(scientistId));
-        	pstmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+        	pstmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
         	pstmt.setInt(3, Integer.parseInt(ideaId));
         	pstmt.setString(4, content);
-        	pstmt.executeUpdate();
 	        rs = pstmt.executeQuery();
             while (rs.next()) {
             }

@@ -74,7 +74,6 @@ public class IdeasServlet extends HttpServlet {
         	pstmt.setArray(4, comment_ids_array);
         	pstmt.setInt(5, Integer.parseInt(scientist_id));
         	pstmt.setArray(6, domain_ids_array);
-        	pstmt.executeUpdate();
 	        rs = pstmt.executeQuery();
             while (rs.next()) {
             }
