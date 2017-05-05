@@ -73,3 +73,10 @@ form[role=login] {
 	.form-links a {
 		color: #fff;
 	}
+	
+table{
+	width:90%;
+	margin:15px 0;
+	color: #5d5d5d;
+	background: #f2f2f2;
+}
