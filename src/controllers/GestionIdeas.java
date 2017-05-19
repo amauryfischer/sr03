@@ -24,10 +24,10 @@ public class GestionIdeas extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("je suis dans doGet de GestionIdeas. >0<");
+
 			
 		List<idea> lu = ideasDao.findAll();
-		System.out.println("ideasDao.findall fini. >0<");
+
 		String action = request.getParameter("action");
 		if (action != null) {
 			String idCh = request.getParameter("id");
@@ -56,7 +56,7 @@ public class GestionIdeas extends HttpServlet {
 		// recuperer une liste d'utilisateurs
 
 		request.setAttribute("listeIdeas", lu);
-		System.out.println("serAttribute fini. >0<");
+
 		// rediriger vers une page
 		request.getRequestDispatcher("page_accueil.jsp")
 				.forward(request, response);
