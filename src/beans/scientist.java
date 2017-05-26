@@ -3,6 +3,7 @@ package beans;
 public class scientist {
 	private int id;
 	private String name;
+
 	private String pwd;
 	private String idea_ids;
 	private String domain_ids;
