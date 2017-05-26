@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 /**
  * Servlet implementation class PageLogin
  */
-@WebServlet("/comments")
+@WebServlet("/commentsServlet")
 public class PageLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

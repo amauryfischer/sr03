@@ -18,10 +18,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
+import dao.domainsDao;
+;/**
  * Servlet implementation class IdeasServlet
  */
-@WebServlet("/ideas")
+@WebServlet("/ideasServlet")
 public class IdeasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

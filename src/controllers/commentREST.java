@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.idea;
-import dao.ideasDao;
+import beans.comment;
+import dao.commentsDao;
 import net.sf.json.JSONObject;
 
 import java.util.List;
@@ -24,14 +24,14 @@ import javax.json.JsonValue;
 /**
  * Servlet implementation class ideaREST
  */
-@WebServlet("/ideas")
-public class ideaREST extends HttpServlet {
+@WebServlet("/comments")
+public class commentREST extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ideaREST() {
+    public commentREST() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,24 +43,22 @@ public class ideaREST extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		try {
-			idea idea;
-			List<idea> listidea=ideasDao.findAll();
+			comment comment;
+			List<comment> listcomment=commentsDao.findAll();
 			
-			for(idea idea1 : listidea){
+			for(comment comment1 : listcomment){
 				
-				if(idea1!=null){
+				if(comment1!=null){
 					
-
-					JsonObject jsonIdea = Json.createObjectBuilder()
-							.add("id",idea1.getId())
-							.add("title",idea1.getTitle())
-							.add("content",idea1.getContent())
-							.add("date",idea1.getCreatedAt())
-							.add("commentIds",idea1.getCommentIds())
-							.add("scientId",idea1.getScientistId())
+					JsonObject jsonComment = Json.createObjectBuilder()
+							.add("id",comment1.getId())
+							.add("date",comment1.getDate())
+							.add("scientist_id",comment1.getScientistId())
+							.add("idea_id", comment1.getIdeaId())
+							.add("content",comment1.getContent())
 							.build();
 					
-					response.getWriter().append(jsonIdea.toString());
+					response.getWriter().append(jsonComment.toString());
 				}
 			}
 			

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.idea;
-import dao.ideasDao;
+import beans.scientist;
+import dao.scientistsDao;
 import net.sf.json.JSONObject;
 
 import java.util.List;
@@ -24,14 +24,14 @@ import javax.json.JsonValue;
 /**
  * Servlet implementation class ideaREST
  */
-@WebServlet("/ideas")
-public class ideaREST extends HttpServlet {
+@WebServlet("/scientists")
+public class scientistREST extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ideaREST() {
+    public scientistREST() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,24 +43,23 @@ public class ideaREST extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		try {
-			idea idea;
-			List<idea> listidea=ideasDao.findAll();
+			scientist scientist;
+			List<scientist> listscientist=scientistsDao.findAll();
 			
-			for(idea idea1 : listidea){
+			for(scientist scientist1 : listscientist){
 				
-				if(idea1!=null){
+				if(scientist1!=null){
 					
-
-					JsonObject jsonIdea = Json.createObjectBuilder()
-							.add("id",idea1.getId())
-							.add("title",idea1.getTitle())
-							.add("content",idea1.getContent())
-							.add("date",idea1.getCreatedAt())
-							.add("commentIds",idea1.getCommentIds())
-							.add("scientId",idea1.getScientistId())
+					JsonObject jsonScientist = Json.createObjectBuilder()
+							.add("id",scientist1.getId())
+							.add("name",scientist1.getName())
+							.add("pwd",scientist1.getPwd())
+							.add("idea_ids", (scientist1.getIdea_ids() == null) ? "" : scientist1.getIdea_ids())
+							.add("domain_ids",scientist1.getDomain_ids())
+							.add("comment_ids", (scientist1.getComment_ids() == null) ? "" : scientist1.getComment_ids())
 							.build();
 					
-					response.getWriter().append(jsonIdea.toString());
+					response.getWriter().append(jsonScientist.toString());
 				}
 			}
 			

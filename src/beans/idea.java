@@ -12,7 +12,7 @@ public class idea {
 	
 	
 	public idea(){}
-	/*
+	// constructur seems to be needed
 	public idea(int id, String title, String content, String created_at, String comment_ids, int scientist_id, String domain_ids ) {
 		super();
 		this.id = id;
@@ -22,7 +22,7 @@ public class idea {
 		this.comment_ids = comment_ids;
 		this.scientist_id = scientist_id;
 		this.domain_ids = domain_ids;
-	}*/
+	}
 	
 	public int getId(){
 		return this.id;

@@ -11,6 +11,15 @@ public class comment {
 	
 	public comment(){}
 	
+	public comment(int id, String date, int scientist_id, int idea_id, String content) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.scientist_id = scientist_id;
+		this.idea_id = idea_id;
+		this.content = content;
+	}
+
 	public int getId(){
 		return this.id;
 	}
