@@ -15,6 +15,7 @@ import java.util.List;
 import java.io.StringReader;
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonWriter;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonValue;
@@ -45,7 +46,8 @@ public class domainREST extends HttpServlet {
 		try {
 			domain domain;
 			List<domain> listdomain=domainsDao.findAll();
-			
+			int i = 1;
+			response.getWriter().append("[");
 			for(domain domain1 : listdomain){
 				
 				if(domain1!=null){
@@ -55,17 +57,18 @@ public class domainREST extends HttpServlet {
 							.add("title",domain1.getTitle())
 							.add("description",domain1.getDescription())
 							.build();
-					
 					response.getWriter().append(jsonComment.toString());
+				    if (i++ != listdomain.size()) {
+				    	response.getWriter().append(",");
+				    }
+					//response.getWriter().append(jsonComment.toString());
 				}
 			}
+			response.getWriter().append("]");
 			
 		} catch (Exception e) {
 
 		}
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

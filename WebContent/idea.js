@@ -1,3 +1,15 @@
+
+function idea(id, title, content, created_at, comment_ids, scientists_id, domain_ids){
+	this.id = id;
+	this.title = title;
+	this.content = content;
+	this.created_at;
+	this.comment_ids;
+	this.scientists_id;
+	this.domain_ids;
+}
+
+
 function getXhr()
 {
 	var xhr = null; 
@@ -15,15 +27,15 @@ function getXhr()
 		alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest..."); 
 		xhr = false; 
 	} 
-	return xhr
+	return xhr;
 }
 
 
 function traitementAjax()
 {
 	//Partie Ajax
-	var xhr = getXhr()
-	
+	var xhr = getXhr();
+	var array_of_json_idea;
 	xhr.onreadystatechange = function(){
 		/*
 		 * l faut savoir que quand on envoie une requête HTTP via XMLHttpRequest, celle-ci passe par plusieurs états différents :
@@ -36,11 +48,19 @@ function traitementAjax()
 		 */
 	
 		if(xhr.readyState == 4 && xhr.status == 200){
-			resultat = xhr.responseText;
-			alert(xhr.responseText);
+			array_of_json_idea = JSON.parse(xhr.responseText);
+			monAppel(array_of_json_idea);
 			// Traitement du resultat 
 			} 
 	}
 	xhr.open("GET","http://localhost:8080/sr03/ideas",true);
 	xhr.send(null);
+}
+
+function monAppel(text)
+{
+	text.forEach(function(entry) {
+	    console.log(entry);
+	});
+	document.getElementById('demo').innerHTML = text;
 }

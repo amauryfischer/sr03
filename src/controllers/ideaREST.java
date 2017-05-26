@@ -67,9 +67,6 @@ public class ideaREST extends HttpServlet {
 		} catch (Exception e) {
 
 		}
-		
-		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
