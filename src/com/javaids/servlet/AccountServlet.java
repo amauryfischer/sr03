@@ -1,7 +1,7 @@
 package com.javaids.servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Array;
 //import java.io.PrintWriter;
 import java.sql.Connection;
@@ -9,10 +9,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-//import java.util.Calendar;
-//import java.util.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +35,24 @@ public class AccountServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
+	
+	private String getRequestPayload(HttpServletRequest req) {  
+        StringBuilder sb = new StringBuilder();  
+        try(BufferedReader reader = req.getReader();) {  
+                 char[]buff = new char[1024];  
+                 int len;  
+                 while((len = reader.read(buff)) != -1) {  
+                          sb.append(buff,0, len);  
+                 }  
+        }catch (IOException e) {  
+                 e.printStackTrace();  
+        }  
+        return sb.toString();  
+	}  
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -52,6 +66,9 @@ public class AccountServlet extends HttpServlet {
       //  PrintWriter printWriter = response.getWriter();
         
       //retrieve post params
+        String reqString = getRequestPayload(request);
+        System.out.println("reqString="+reqString+" >0<");
+        
         String formType=request.getParameter("formType");
         String query1="";
         int nb_scientists=0;
@@ -76,6 +93,10 @@ public class AccountServlet extends HttpServlet {
             }else if(formType.equals("signIn")){
             	String userName = request.getParameter("login");
             	String userPassword = createMD5.getMd5(request.getParameter("password"));
+    	        /**/
+    	        System.out.println("name="+userName);
+    	        System.out.println("; userPassword="+userPassword);
+    	        /**/
             	pstmt = con.prepareStatement("SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name=? AND pwd=?;");
     	        pstmt.setString(1, userName);
     	        pstmt.setString(2, userPassword);
@@ -86,11 +107,17 @@ public class AccountServlet extends HttpServlet {
 	        while (rs.next()) {
 	        	
 	        	 nb_scientists=Integer.parseInt( rs.getString(1));
+	        	 //printout
 	        	 System.out.println("nb_scientists=" + nb_scientists);
 	        	 
 	        	if(nb_scientists>0){
-	        		response.sendRedirect("/sr03/page_accueil.jsp");
-	        	//}else{
+	        		
+	        		//response.sendRedirect("/sr03/client_page_accueil.jsp");
+	        	
+	        		response.setHeader("REQUEST_AUTH", "1"); 
+	        		
+	        		
+	        		//}else{
 	        		//PrintWriter printWriter = response.getWriter();
 	        		//printWriter.print("<script type=\"text/javascript\">alert(\"Sign in failed.\");</script>");
 	        	}
@@ -120,7 +147,8 @@ public class AccountServlet extends HttpServlet {
             }
         }
         
-        response.sendRedirect("/sr03/page_login.jsp");
+        response.setHeader("REQUEST_AUTH", "1"); 
+        //response.sendRedirect("/sr03/page_login.jsp");
         
 	}
 
