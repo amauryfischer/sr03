@@ -22,27 +22,28 @@ function getXhr()
 function traitementAjax()
 {
 	//Partie Ajax
-	alert("traitementAjax");
 	var xhr = getXhr();
 	var login = document.getElementById("login").value;
-	alert("login="+login);
 	var password = document.getElementById("password").value;
 	var formType = document.getElementById("formType").value;
 	
-	alert("login="+login+"; password="+password+"; formType="+formType);
-	
 	xhr.onreadystatechange = function(){
-
-	
 		if(xhr.readyState == 4 && xhr.status == 200){
-			resultat = xhr.responseText;
-			alert(xhr.responseText);
-			// Traitement du resultat 
+			if(xhr.getResponseHeader('REQUEST_AUTH') === '2'){
+				document.location = '/sr03/client_page_accueil.jsp';
+			}else{
+				alert("Login ou mot de pass incorrect.");
+			}
+			
+			
 			} 
 	}
 	xhr.open("POST","http://localhost:8080/sr03/AccountServlet",true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("formType="+formType+"&login="+login+"&password="+password);
 	
-	
 }
+
+
+
+

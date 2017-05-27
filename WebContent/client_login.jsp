@@ -46,16 +46,7 @@
 			
 		}
 
-	//pour rediriger la page
-	if(xmlHttpReq.readyState == 4){  
-	    if(xmlHttpReq.status == 200){  
-	        if(xmlHttpReq.getResponseHeader("REQUEST_AUTH")!=null&&xmlHttpReq.getResponseHeader("REQUEST_AUTH")=="1"){  
-	            window.location("client_idea.jsp");  
-	        }else{  
-	            //do something  
-	        }  
-	    }
-	}
+
 
 
 

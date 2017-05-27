@@ -9,6 +9,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,20 +70,51 @@ public class AccountServlet extends HttpServlet {
         
       //retrieve post params
         String reqString = getRequestPayload(request);
-        System.out.println("reqString="+reqString+" >0<");
+        //System.out.println("reqString:  "+reqString+" >0<");//ok
         
-        String formType=request.getParameter("formType");
+        //trouver des valeurs
+       
+         Map<String, String> mapRequest = new HashMap<String, String>();
+        String[] arrSplit=null;
+        arrSplit=reqString.split("[&]");
+        for(String strSplit : arrSplit){
+        	//System.out.println("strSplit:  "+strSplit+" >0<"); //ok
+        	String[] arrSplitEqual=null;
+        	arrSplitEqual=strSplit.split("[=]");
+        	
+        	if(arrSplitEqual.length>1)
+        	{
+        		mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
+        	}
+        	else{
+        		 if(arrSplitEqual[0]!="")
+                 {
+        			 mapRequest.put(arrSplitEqual[0], "");      
+        	     }
+        	}
+        
+        }
+       
+        
+        
+        
+        String formType = mapRequest.get("formType"); 
         String query1="";
         int nb_scientists=0;
         
-
+        
+       
+       // System.out.println("formType:  "+formType+" >0<"); //ok
         
         try {
         	con = DriverManager.getConnection(url, user, password);
             if(formType.equals("newAccount")){
-    	        String newName = request.getParameter("newName");
-    	        String newPassword = request.getParameter("newPassword");
-    	        String [] domain_ids = { request.getParameter("domain_ids") };
+            	
+            	 System.out.println("newAccount. >0<");
+            	
+    	        String newName = mapRequest.get("newName");
+    	        String newPassword = mapRequest.get("newPassword");
+    	        String [] domain_ids = { mapRequest.get("domain_ids") };
     	        Array domain_ids_array = con.createArrayOf("NUMERIC", domain_ids);
     	        //crypto
     	        newPassword=createMD5.getMd5(newPassword);
@@ -91,11 +125,15 @@ public class AccountServlet extends HttpServlet {
             	pstmt.setArray(3, domain_ids_array);
             	
             }else if(formType.equals("signIn")){
-            	String userName = request.getParameter("login");
-            	String userPassword = createMD5.getMd5(request.getParameter("password"));
+            	
+            	
+            	 System.out.println("signIn. >0<");
+            	
+            	String userName = mapRequest.get("login");
+            	String userPassword = createMD5.getMd5(mapRequest.get("password"));
     	        /**/
-    	        System.out.println("name="+userName);
-    	        System.out.println("; userPassword="+userPassword);
+    	      //  System.out.println("name="+userName);//ok
+    	      //  System.out.println("; userPassword="+userPassword);//ok
     	        /**/
             	pstmt = con.prepareStatement("SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name=? AND pwd=?;");
     	        pstmt.setString(1, userName);
@@ -114,12 +152,9 @@ public class AccountServlet extends HttpServlet {
 	        		
 	        		//response.sendRedirect("/sr03/client_page_accueil.jsp");
 	        	
+	        		response.setHeader("REQUEST_AUTH", "2"); 
+	        	}else{
 	        		response.setHeader("REQUEST_AUTH", "1"); 
-	        		
-	        		
-	        		//}else{
-	        		//PrintWriter printWriter = response.getWriter();
-	        		//printWriter.print("<script type=\"text/javascript\">alert(\"Sign in failed.\");</script>");
 	        	}
 	        	
             }
@@ -147,9 +182,9 @@ public class AccountServlet extends HttpServlet {
             }
         }
         
-        response.setHeader("REQUEST_AUTH", "1"); 
-        //response.sendRedirect("/sr03/page_login.jsp");
         
+
 	}
+
 
 }
