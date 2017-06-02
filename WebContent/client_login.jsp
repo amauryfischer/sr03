@@ -81,7 +81,7 @@
 	          -->
 	         
 	          <div>
-	            <a href="new_account.jsp">Create account</a> <!-- or <a href="#">reset password</a> -->
+	            <a href="client_new_account.jsp">Create account</a> <!-- or <a href="#">reset password</a> -->
 	          </div>
 	          
 	        </form>

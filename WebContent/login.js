@@ -44,6 +44,10 @@ function traitementAjax()
 	
 }
 
+function createNewAccount_Ajax()
+{
+	
+}
 
 
 
