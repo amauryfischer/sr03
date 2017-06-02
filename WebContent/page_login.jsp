@@ -8,10 +8,11 @@
 	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
 	<link rel="stylesheet" type="text/css" href="login.css">
 	<script type="text/javascript" src="cookies.js"> </script>
+	<script type="text/javascript" src="login.js"> </script>
 	<script type="text/javascript">
 		var userName;
 		var password;
-
+	
 		//function qui permet de retrouver des infos dans cookies
 		function greetUser(){
 			if(navigator.cookieEnabled){
@@ -44,7 +45,12 @@
 			}
 			
 		}
-	</script>
+
+
+
+
+
+		</script>
 </head>
 
 <body onload="greetUser();">
@@ -55,7 +61,10 @@
 	    
 	    <div class="col-md-4">
 	      <section class="login-form">
-	        <form method="post" role="login" action="AccountServlet" >
+	        <form id="formLogin" method="post" role="login" action="AccountServlet">
+	        <!-- 
+	        <form method="post" role="login" action="AccountServlet">
+	         -->
 	          <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
 	          <input type="hidden" name="formType" id="formType" value="signIn">
 	          <input type="text" name="login" id="login" placeholder="Email" required class="form-control input-lg"  />
@@ -64,9 +73,15 @@
 	                   
 	          <div class="pwstrength_viewport_progress"></div>
 	          
-	          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block" onclick="msjCookie();">Sign in</button>
+	          <button type="button" name="go" class="btn btn-lg btn-primary btn-block" onclick="traitementAjax();msjCookie();">Sign in</button>
+	         
+	         <!-- 
+	         $("#formId").submit(); 
+	          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block" onclick="traitementAjax();msjCookie();">Sign in</button>
+	          -->
+	         
 	          <div>
-	            <a href="new_account.jsp">Create account</a> <!-- or <a href="#">reset password</a> -->
+	            <a href="client_new_account.jsp">Create account</a> <!-- or <a href="#">reset password</a> -->
 	          </div>
 	          
 	        </form>

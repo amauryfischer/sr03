@@ -29,13 +29,12 @@ function traitementAjax()
 	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
+			alert(xhr.getResponseHeader('REQUEST_AUTH'));
 			if(xhr.getResponseHeader('REQUEST_AUTH') === '2'){
 				document.location = '/sr03/client_page_accueil.jsp';
 			}else{
 				alert("Login ou mot de pass incorrect.");
 			}
-			
-			
 			} 
 	}
 	xhr.open("POST","http://localhost:8080/sr03/AccountServlet",true);

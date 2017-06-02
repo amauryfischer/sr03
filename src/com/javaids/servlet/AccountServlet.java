@@ -99,7 +99,6 @@ public class AccountServlet extends HttpServlet {
         
         
         String formType = mapRequest.get("formType"); 
-        String query1="";
         int nb_scientists=0;
         
         
@@ -131,10 +130,7 @@ public class AccountServlet extends HttpServlet {
             	
             	String userName = mapRequest.get("login");
             	String userPassword = createMD5.getMd5(mapRequest.get("password"));
-    	        /**/
-    	      //  System.out.println("name="+userName);//ok
-    	      //  System.out.println("; userPassword="+userPassword);//ok
-    	        /**/
+            	
             	pstmt = con.prepareStatement("SELECT COUNT(*) AS nb_scientists FROM scientists WHERE name=? AND pwd=?;");
     	        pstmt.setString(1, userName);
     	        pstmt.setString(2, userPassword);
