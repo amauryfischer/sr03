@@ -48,6 +48,7 @@ function traitementAjax()
 		 */
 	
 		if(xhr.readyState == 4 && xhr.status == 200){
+			debugger;
 			array_of_json_idea = JSON.parse(xhr.responseText);
 			monAppel(array_of_json_idea);
 			// Traitement du resultat 

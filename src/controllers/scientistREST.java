@@ -45,7 +45,8 @@ public class scientistREST extends HttpServlet {
 		try {
 			scientist scientist;
 			List<scientist> listscientist=scientistsDao.findAll();
-			
+			String finalJson="[";
+			int i = 1;
 			for(scientist scientist1 : listscientist){
 				
 				if(scientist1!=null){
@@ -58,10 +59,14 @@ public class scientistREST extends HttpServlet {
 							.add("domain_ids",scientist1.getDomain_ids())
 							.add("comment_ids", (scientist1.getComment_ids() == null) ? "" : scientist1.getComment_ids())
 							.build();
-					
-					response.getWriter().append(jsonScientist.toString());
+					finalJson+=jsonScientist.toString();
+				    if (i++ != listscientist.size()) {
+				    	finalJson+=",";
+				    };
 				}
 			}
+			finalJson+="]";
+			response.getWriter().append(finalJson);
 			
 		} catch (Exception e) {
 

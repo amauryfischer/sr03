@@ -45,7 +45,8 @@ public class commentREST extends HttpServlet {
 		try {
 			comment comment;
 			List<comment> listcomment=commentsDao.findAll();
-			
+			String finalJson="[";
+			int i = 1;
 			for(comment comment1 : listcomment){
 				
 				if(comment1!=null){
@@ -57,11 +58,14 @@ public class commentREST extends HttpServlet {
 							.add("idea_id", comment1.getIdeaId())
 							.add("content",comment1.getContent())
 							.build();
-					
-					response.getWriter().append(jsonComment.toString());
+					finalJson+=jsonComment.toString();
+				    if (i++ != listcomment.size()) {
+				    	finalJson+=",";
+				    };
 				}
 			}
-			
+			finalJson+="]";
+			response.getWriter().append(finalJson);
 		} catch (Exception e) {
 
 		}

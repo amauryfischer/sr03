@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.idea;
 import dao.ideasDao;
-import net.sf.json.JSONObject;
 
 import java.util.List;
 import java.io.StringReader;
@@ -45,7 +44,8 @@ public class ideaREST extends HttpServlet {
 		try {
 			idea idea;
 			List<idea> listidea=ideasDao.findAll();
-			
+			String finalJson="[";
+			int i = 1;
 			for(idea idea1 : listidea){
 				
 				if(idea1!=null){
@@ -59,10 +59,15 @@ public class ideaREST extends HttpServlet {
 							.add("commentIds",idea1.getCommentIds())
 							.add("scientId",idea1.getScientistId())
 							.build();
+					finalJson+=jsonIdea.toString();
+				    if (i++ != listidea.size()) {
+				    	finalJson+=",";
+				    };
 					
-					response.getWriter().append(jsonIdea.toString());
-				}
+				};
 			}
+			finalJson+="]";
+			response.getWriter().append(finalJson);
 			
 		} catch (Exception e) {
 
