@@ -60,6 +60,7 @@ function createNewAccount_Ajax()
 				//alert("Creation succeeded");
 				document.location = '/sr03/client_login.jsp';
 			}else{
+				document.location = '/sr03/client_login.jsp';
 				//alert("Creation failed");
 			}
 			
