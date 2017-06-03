@@ -42,7 +42,7 @@
 		 	</div>
 		 	
 		 	<!-- submit -->
-		 	<input type="submit" value="Valider">
+		 	<button type="button" name="valider"  onclick="createNewAccount_Ajax();">Valider</button>
 		 	
 		 	</fieldset>
 		 </form>

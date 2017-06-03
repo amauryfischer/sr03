@@ -46,7 +46,32 @@ function traitementAjax()
 function createNewAccount_Ajax()
 {
 	
-}
+	alert("createNewAccount_Ajax///");
+	var xhr = getXhr();
+	var formType = document.getElementById("formType").value;
+	var newName = document.getElementById("newName").value;
+	var newPassword = document.getElementById("newPassword").value;
+	var domain_ids = document.getElementById("domain_ids").value;
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
 
+			if(xhr.getResponseHeader('REQUEST_AUTH') === '2'){
+				//alert("Creation succeeded");
+				document.location = '/sr03/client_login.jsp';
+			}else{
+				//alert("Creation failed");
+			}
+			
+			
+		} 
+	}
+	
+	xhr.open("POST","http://localhost:8080/sr03/AccountServlet",true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send("formType="+formType+"&newName="+newName+"&newPassword="+newPassword+"&domain_ids="+domain_ids);
+	alert("send");
+	
+}
 
 

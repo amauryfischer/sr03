@@ -103,13 +103,13 @@ public class AccountServlet extends HttpServlet {
         
         
        
-       // System.out.println("formType:  "+formType+" >0<"); //ok
+        System.out.println("formType////:  "+formType+" >0<"); //ok
         
         try {
         	con = DriverManager.getConnection(url, user, password);
             if(formType.equals("newAccount")){
             	
-            	 System.out.println("newAccount. >0<");
+            	 //System.out.println("newAccount. >0<");
             	
     	        String newName = mapRequest.get("newName");
     	        String newPassword = mapRequest.get("newPassword");
@@ -136,24 +136,30 @@ public class AccountServlet extends HttpServlet {
     	        pstmt.setString(2, userPassword);
             }
 	        
+            //ececute SQL
 	        rs = pstmt.executeQuery();
 	        
-	        while (rs.next()) {
-	        	
-	        	 nb_scientists=Integer.parseInt( rs.getString(1));
-	        	 //printout
-	        	 System.out.println("nb_scientists=" + nb_scientists);
-	        	 
-	        	if(nb_scientists>0){
-	        		
-	        		//response.sendRedirect("/sr03/client_page_accueil.jsp");
-	        	
-	        		response.setHeader("REQUEST_AUTH", "2"); 
-	        	}else{
-	        		response.setHeader("REQUEST_AUTH", "1"); 
-	        	}
-	        	
-            }
+	        //response
+	        if(formType.equals("signIn")){
+		        while (rs.next()) {
+		        	
+		        	 nb_scientists=Integer.parseInt( rs.getString(1));
+		        	 //printout
+		        	 System.out.println("nb_scientists=" + nb_scientists);
+		        	 
+		        	if(nb_scientists>0){
+		        		
+		        		//response.sendRedirect("/sr03/client_page_accueil.jsp");
+		        	
+		        		response.setHeader("REQUEST_AUTH", "2"); 
+		        	}else{
+		        		response.setHeader("REQUEST_AUTH", "1"); 
+		        	}
+		        	
+		        }
+	        }else if(formType.equals("newAccount")){
+	        	response.setHeader("REQUEST_AUTH", "2"); 
+	        }
 
         } catch (SQLException ex) {
         	System.out.println(ex);
