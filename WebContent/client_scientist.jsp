@@ -13,7 +13,7 @@ table, th, td, tr {
 <link href="bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<script src="idea.js"></script>
+<script src="scientist.js"></script>
 <button type="button" onclick="traitementAjax()">API meteo</button>
 <p id="demo"></p>
 </body>

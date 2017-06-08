@@ -53,7 +53,7 @@ function traitementAjax()
 			// Traitement du resultat 
 			} 
 	}
-	xhr.open("GET","http://localhost:8080/sr03/ideas",true);
+	xhr.open("GET","http://localhost:8080/sr03/comments",true);
 	xhr.send(null);
 }
 
