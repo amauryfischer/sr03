@@ -13,6 +13,34 @@ table, th, td, tr {
 <link href="bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<%
+	//allow access only if session exists
+	
+	String userName = null;
+	
+	if(session.getAttribute("userName")==null){
+		response.sendRedirect("client_login.jsp");
+	}else {
+		userName = (String) session.getAttribute("userName");
+	}
+	
+	String userNameSession = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("userName")){
+				userNameSession = cookie.getValue();			
+			}
+			if(cookie.getName().equals("JSESSIONID")){
+				sessionID = cookie.getValue();
+			}
+		}
+	}
+
+
+%>
+<h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %></h3>
 <script src=domain.js></script>
 <button type="button" onclick="traitementAjax()">API meteo</button>
 <p id="demo"></p>
