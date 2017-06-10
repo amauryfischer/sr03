@@ -20,6 +20,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.createMD5;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+
 /**
  * Servlet implementation class AccountServlet
  */
@@ -97,13 +102,12 @@ public class AccountServlet extends HttpServlet {
        
         
         
-        
         String formType = mapRequest.get("formType"); 
         int nb_scientists=0;
         
         
        
-        System.out.println("formType////:  "+formType+" >0<"); //ok
+       // System.out.println("formType////:  "+formType+" >0<"); //ok
         
         try {
         	con = DriverManager.getConnection(url, user, password);
@@ -145,13 +149,29 @@ public class AccountServlet extends HttpServlet {
 		        	
 		        	 nb_scientists=Integer.parseInt( rs.getString(1));
 		        	 //printout
+		        	 System.out.println("avant nb scientists");
 		        	 System.out.println("nb_scientists=" + nb_scientists);
+		        	 System.out.println("apres nb scientists");
 		        	 
 		        	if(nb_scientists>0){
 		        		
-		        		//response.sendRedirect("/sr03/client_page_accueil.jsp");
-		        	
+		        		//login reussi
+		        		
 		        		response.setHeader("REQUEST_AUTH", "2"); 
+		        		
+		        		//session
+		        		
+		        		HttpSession session = request.getSession();
+		        		session.setAttribute("userName", mapRequest.get("login"));
+		        		System.out.println("userName="+mapRequest.get("login"));
+		        		
+		        		//setting session to expiry in 30 mins
+		        		
+		        		session.setMaxInactiveInterval(30*60);
+		        		Cookie userName = new Cookie("userName", mapRequest.get("login"));
+		        		userName.setMaxAge(30*60);
+		        		response.addCookie(userName);
+		        		
 		        	}else{
 		        		response.setHeader("REQUEST_AUTH", "1"); 
 		        	}

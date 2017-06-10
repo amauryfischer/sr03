@@ -13,10 +13,42 @@
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="login.css">
-  
+  <link rel="stylesheet" type="text/css" href="client_page_accueil.css">
   
 </head>
 <body>
+
+<%
+	//allow access only if session exists
+	
+	String userName = null;
+	
+	if(session.getAttribute("userName")==null){
+		response.sendRedirect("client_login.jsp");
+	}else {
+		userName = (String) session.getAttribute("userName");
+	}
+	
+	String userNameSession = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if(cookies != null){
+		for(Cookie cookie : cookies){
+			if(cookie.getName().equals("userName")){
+				userNameSession = cookie.getValue();			
+			}
+			if(cookie.getName().equals("JSESSIONID")){
+				sessionID = cookie.getValue();
+			}
+		}
+	}
+
+
+%>
+<h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %></h3>
+
+
+
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
@@ -56,60 +88,7 @@
 </div>
 
 
-<table border="1"  >
-<!--  
-<tr>
-	<th>ID</th>
-	<th>
-		<a href="GestionIdeas?action=sort">NOM</a>
-	</th>
-	<th>TEL</th>
-	<th>USERNAME</th>
-	<th>ACTIONS</th>
-</tr>
--->
-
-<a href="GestionIdeas">Afficher tous les idees</a>
-	<tr>
-				<td>Id</td>
-				<td>Title</td>
-				<td>Content</td>
-				<td>CreatedAt</td>
-				<td>CommentIds</td>
-				<td>ScientistId</td>
-						
-				
-	</tr>
-	<%
-		Object obj = request.getAttribute("listeIdeas");
-		if(obj!=null){
-			List<idea> lu = (List<idea>)obj;
-			//List<idea> lu = obj;
-			for(idea u : lu){
-	%>
-			<tr>
-				<td><%=u.getId()%></td>
-				<td><%=u.getTitle()%></td>
-				<td><%=u.getContent()%></td>
-				<td><%=u.getCreatedAt()%></td>
-				<td><%=u.getCommentIds()%></td>
-				<td><%=u.getScientistId()%></td>
-				
-			<!--  	<td>
-					<a href="GestionUsers?action=supprimer&id=<%=u.getId()%>">Supprimer</a>
-					<a href="GestionUsers?action=modifier&id=<%=u.getId()%>">Modifier</a>	
-				</td>
-			-->	
-				
-				
-			</tr>
-	<%
-			}
-			
-			
-		}
-	%>
-</table>
+<a href="/sr03/client_idea.jsp" class="idea" ><img class="img" src="images/idea-icon.jpg" alt=""  /></a>
 
 
 
