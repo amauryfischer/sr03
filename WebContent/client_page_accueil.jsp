@@ -6,14 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Partage d'idee</title>
+  <title>Share your ideas</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="bootstrap.min.css">  
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="login.css">
-  <link rel="stylesheet" type="text/css" href="client_page_accueil.css">
+  
   
 </head>
 <body>
@@ -45,21 +45,29 @@
 
 
 %>
-<h3>Hi <%=userName %>, Login successful. Your Session ID=<%=sessionID %></h3>
-
 
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">Projet SR03</a>
+    	<a class="navbar-brand" href="#">Hi,<%=userName %>!</a>
+       <!--   <a class="navbar-brand" href="#">Projet SR03</a>-->
     </div>
     <div>
         <ul class="nav navbar-nav">
-           <!-- <li class="active"><a href="ideas">Ajouter idee</a></li>
-             <li><a href="#">Ajouter Comment</a></li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            
+			<li class="active"><a href="client_page_accueil.jsp">HOME</a></li>
+            <li><a href="client_idea.jsp">IDEAS</a></li>
+         	<li><a href="ideas.jsp">ADD IDEA</a></li>
+            <li><a href="client_scientist.jsp">SCIENTISTS</a></li>
+            <li><a href="client_domain.jsp">DOMAINES</a></li>
+            <li><a href="client_comment.jsp">COMMENTS</a></li>
+            <li><a href="comments.jsp">ADD COMMENT</a></li>
+             
+          <!-- <li style="margin-left" class="navbar-right"><a href="#">Log out</a></li> -->
+          
+           <!--  <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">  
                     Java
                     <b class="caret"></b>
                 </a>
@@ -72,17 +80,18 @@
                     <li class="divider"></li>
                     <li><a href="#"> </a></li>
                 </ul>
-            </li>
-              -->
-        </ul>
+            </li> -->
+           </ul>
     </div>
     </div>
 </nav>
 
 <div class="container">
   <div class="jumbotron">
-    <h1>Partage d'idee</h1>
-    <p>DISCUSSIONS ET PARTAGES D'IDEES PARMI LES CHERCHEURS</p> 
+    <h1>Project SR03 - Share your ideas</h1>
+    <p>DISCUSSIONS AND SHAREING IDEAS BETWEEN SCIENTISTS</p> 
+    <br>
+    <p align="right">Jin YU<br>Amaury FISCHER DE GUILLEBON</p>
   </div>
 
 </div>

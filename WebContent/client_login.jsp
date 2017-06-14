@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Partage idee - login</title>
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<link rel="stylesheet" href="/bootstrap.min.css">  
 	<link rel="stylesheet" type="text/css" href="login.css">
 	<script type="text/javascript" src="cookies.js"> </script>
 	<script type="text/javascript" src="login.js"> </script>
@@ -98,7 +98,7 @@
 	  </div>
 	  
 	  <p>
-	    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbootsnipp.com%2Fiframe%2FW00op" target="_blank"><small>HTML</small><sup>5</sup></a>
+
 	    <br>
 	    <br>
 	    
