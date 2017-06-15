@@ -82,7 +82,7 @@ function monAppel(text)
 
 function newComment_Ajax()
 {
-	alert("newComment_Ajax");
+	//alert("newComment_Ajax");
 	var xhr = getXhr();
 	var scientistId = document.getElementById("scientistId").value;
 	var ideaId = document.getElementById("ideaId").value;
@@ -105,6 +105,6 @@ function newComment_Ajax()
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("scientistId="+scientistId+"&ideaId="+ideaId+"&content="+content);
 	
-	alert("scientistId="+scientistId+"&ideaId="+ideaId+"&content="+content);
+	//alert("scientistId="+scientistId+"&ideaId="+ideaId+"&content="+content);
 }
 

@@ -29,7 +29,7 @@ function traitementAjax()
 	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			alert(xhr.getResponseHeader('REQUEST_AUTH'));
+			//alert(xhr.getResponseHeader('REQUEST_AUTH'));
 			if(xhr.getResponseHeader('REQUEST_AUTH') === '2'){
 				document.location = '/sr03/client_page_accueil.jsp';
 			}else{
@@ -58,7 +58,7 @@ function createNewAccount_Ajax()
 				//alert("Creation succeeded");
 				document.location = '/sr03/client_login.jsp';
 			}else{
-				alert("Creation failed");
+				//alert("Creation failed");
 				document.location = '/sr03/client_login.jsp';
 				
 			}

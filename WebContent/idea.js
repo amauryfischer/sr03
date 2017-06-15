@@ -59,7 +59,7 @@ function traitementAjax()
 
 function monAppel(text)
 {
-	var html_content = '<table class="table table-striped table-condensed">';
+	var html_content = '<table class="table table-striped table-condensed" >';
 	// header pour le tableau, permet d'afficher ttes les méthodes de l'objet
 	html_content += "<thead><tr>";
 	Object.keys(text[0]).forEach(function(attr_name) {
