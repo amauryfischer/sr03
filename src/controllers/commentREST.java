@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +36,20 @@ public class commentREST extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+	private String getRequestPayload(HttpServletRequest req) {  
+        StringBuilder sb = new StringBuilder();  
+        try(BufferedReader reader = req.getReader();) {  
+                 char[]buff = new char[1024];  
+                 int len;  
+                 while((len = reader.read(buff)) != -1) {  
+                          sb.append(buff,0, len);  
+                 }  
+        }catch (IOException e) {  
+                 e.printStackTrace();  
+        }  
+        return sb.toString();  
+	}  
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,9 +57,26 @@ public class commentREST extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		System.out.println("comments GET.////// ");
+		
+		String ideaId = request.getParameter("idea");
+		System.out.println("ideaId : "+ ideaId);
+		
+
 		try {
 			comment comment;
-			List<comment> listcomment=commentsDao.findAll();
+			List<comment> listcomment;
+			if(ideaId!=null && ideaId!="0"){
+				System.out.println("getComments : "+ ideaId);
+				listcomment=commentsDao.getComments(ideaId);
+			}else{
+				
+				System.out.println("findAll : "+ ideaId);
+				listcomment=commentsDao.findAll();
+			}
+			
+
+			
 			String finalJson="[";
 			int i = 1;
 			for(comment comment1 : listcomment){

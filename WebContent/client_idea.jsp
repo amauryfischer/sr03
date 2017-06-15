@@ -8,16 +8,8 @@
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" type="text/css" href="login.css">
+  <title>IDEAS</title>
 
-	<!--  th, td, tr sborder: 1px solid black;-->
-<title>IDEAS</title>
-	<style>
-	table {
-		
-		 class: "table table-striped";
-	}
-	
-	</style>
 </head>
 <body onload="traitementAjax()">
 <%

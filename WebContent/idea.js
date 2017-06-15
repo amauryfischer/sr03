@@ -62,6 +62,7 @@ function monAppel(text)
 	var html_content = '<table class="table table-striped table-condensed" >';
 	// header pour le tableau, permet d'afficher ttes les méthodes de l'objet
 	html_content += "<thead><tr>";
+	html_content += "<th>Comments</th>";
 	Object.keys(text[0]).forEach(function(attr_name) {
 		html_content += "<th>"+attr_name+"</th>";
 	});
@@ -71,7 +72,12 @@ function monAppel(text)
 	text.forEach(function(entry) {
 		html_content += "<tr>";
 		Object.keys(entry).forEach(function(attr) {
+			if(attr=="id"){
+				html_content += "<th><a href=\'idea_comment.jsp?id="+entry[attr]+"\'>Comments</a></th>";
+				html_content += "<th>"+entry[attr]+"</th>";
+			}else{
 			html_content += "<th>"+entry[attr]+"</th>";
+			}
 		});
 	    html_content += "</tr>";
 	});
@@ -98,8 +104,7 @@ function newIdea_Ajax()
 			}else{
 				document.location = '/sr03/client_idea.jsp';
 			}
-			
-			
+	
 		} 
 	}
 	

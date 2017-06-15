@@ -108,3 +108,29 @@ function newComment_Ajax()
 	//alert("scientistId="+scientistId+"&ideaId="+ideaId+"&content="+content);
 }
 
+function getComments_Ajax()
+{
+	//Partie Ajax
+	var xhr = getXhr();
+	var array_of_json_idea;
+	var ideaId = GetRequest();
+	xhr.onreadystatechange = function(){
+	
+		if(xhr.readyState == 4 && xhr.status == 200){
+			array_of_json_idea = JSON.parse(xhr.responseText);
+			monAppel(array_of_json_idea);
+			} 
+	}
+	xhr.open("GET","http://localhost:8080/sr03/comments?idea="+ideaId,true);
+	xhr.send(null);
+}
+
+function GetRequest() {
+	var url = location.search; 
+	if (url.indexOf("?") != -1) { 
+	var str = url.substr(1); 
+	strs = str.split("="); 
+	//alert(strs[1]); 
+	return strs[1];
+	}
+}
