@@ -7,11 +7,12 @@
 <html>
 <head>
 
-	<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="ideas.css">
 	<script type="text/javascript" src="login.js"> </script>
 	<script type="text/javascript" src="idea.js"> </script>
-
+	<title>NEW IDEA</title>
+	
 </head>
 
 <body>

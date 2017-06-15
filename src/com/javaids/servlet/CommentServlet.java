@@ -2,7 +2,6 @@ package com.javaids.servlet;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,17 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
-;/**
- * Servlet implementation class IdeasServlet
+
+/**
+ * Servlet implementation class CommentServlet
  */
-@WebServlet("/ideasServlet")
-public class IdeasServlet extends HttpServlet {
+@WebServlet("/commentServlet")
+public class CommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+      
 	private String getRequestPayload(HttpServletRequest req) {  
         StringBuilder sb = new StringBuilder();  
         try(BufferedReader reader = req.getReader();) {  
@@ -46,6 +42,15 @@ public class IdeasServlet extends HttpServlet {
         return sb.toString();  
 	}  
 	
+	
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CommentServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -54,9 +59,6 @@ public class IdeasServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	
-
-	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -66,19 +68,21 @@ public class IdeasServlet extends HttpServlet {
         ResultSet rs = null;
         
         //Db connection init
-		String url = "jdbc:postgresql://localhost:5432/sr03";
+      	String url = "jdbc:postgresql://localhost:5432/sr03";
         String user = "toto2";
         String password = "azerty";
-             
+        
         //retrieve post params
         String reqString = getRequestPayload(request);
         
+        System.out.println("reqString: "+reqString);
+         
         //trouver des valeurs
         Map<String, String> mapRequest = new HashMap<String, String>();
         String[] arrSplit=null;        
         arrSplit=reqString.split("[&]");
         for(String strSplit : arrSplit){
-        	//System.out.println("strSplit:  "+strSplit+" >0<"); //ok
+
         	String[] arrSplitEqual=null;
         	arrSplitEqual=strSplit.split("[=]");
         	
@@ -96,40 +100,29 @@ public class IdeasServlet extends HttpServlet {
         }
         
         
-        
-        String title = mapRequest.get("title");
-        String scientist_id = mapRequest.get("scientistId");
+        String scientistId = mapRequest.get("scientistId");
+        String ideaId = mapRequest.get("ideaId");
         String content = mapRequest.get("content");
-        String [] domain_ids = { mapRequest.get("domainIds") }; 
+
+        System.out.println("scientistId="+scientistId+",ideaId="+ideaId+",content="+content);
         
-        //Date current_date = Calendar.getInstance().getTime();
-        String [] comment_ids = { mapRequest.get("commentIds") };
-        
-        //test
-        //System.out.println("title="+title+",scientist_id="+scientist_id+",content="+content+",domain_ids="+domain_ids+"  >0<.");
-        
-        
-        //printWriter.print(firstName);
         try {
-	        con = DriverManager.getConnection(url, user, password);
-	        
-	        //Array comment_ids_array = con.createArrayOf("NUMERIC", comment_ids);
-	        Array domain_ids_array = con.createArrayOf("NUMERIC", domain_ids);
-	        Array comment_ids_array = con.createArrayOf("NUMERIC", comment_ids);
-	        
-	        pstmt = con.prepareStatement("insert into ideas (title,content,created_at,comment_ids,scientist_id,domain_ids) VALUES (?,?,?,?,?,?)");
-        	pstmt.setString(1, title);
-        	pstmt.setString(2, content);
-        	pstmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
-        	pstmt.setArray(4, comment_ids_array);
-        	pstmt.setInt(5, Integer.parseInt(scientist_id));
-        	pstmt.setArray(6, domain_ids_array);
+        	con = DriverManager.getConnection(url, user, password);
         	
-	        rs = pstmt.executeQuery();
-                              
+        	pstmt = con.prepareStatement("insert into comments (scientist_id,date,idea_id,content) VALUES (?,?,?,?)");
+        	
+        	pstmt.setInt(1,  Integer.parseInt(scientistId));
+        	pstmt.setDate(2, new java.sql.Date(System.currentTimeMillis()));
+        	pstmt.setInt(3, Integer.parseInt(ideaId));
+        	pstmt.setString(4, content);
+        	
+        	System.out.println("avant executeQuery.");
+        	rs = pstmt.executeQuery();
+            
 	        response.setHeader("REQUEST_AUTH", "2");
+	        System.out.println("fin");
 	        
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
         	System.out.println(ex);
             /*Logger lgr = Logger.getLogger(Version.class.getName());
             lgr.log(Level.SEVERE, ex.getMessage(), ex);*/
@@ -152,13 +145,7 @@ public class IdeasServlet extends HttpServlet {
                 /*lgr.log(Level.WARNING, ex.getMessage(), ex);*/
             }
         }
-	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+	
+	}//doPost
 
 }

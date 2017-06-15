@@ -40,11 +40,11 @@ function traitementAjax()
 		/*
 		 * l faut savoir que quand on envoie une requête HTTP via XMLHttpRequest, celle-ci passe par plusieurs états différents :
 
-0 : L'objet XHR a été créé, mais pas encore initialisé (la méliode open n'a pas encore été appelée)
-1 : L'objet XHR a été créé, mais pas encore envoyé (avec la méliode send )
-2 : La méliode send vient d'être appelée
-3 : Le serveur traite les informations et a commencé à renvoyer des données
-4 : Le serveur a fini son travail, et toutes les données sont réceptionnées
+			0 : L'objet XHR a été créé, mais pas encore initialisé (la méliode open n'a pas encore été appelée)
+			1 : L'objet XHR a été créé, mais pas encore envoyé (avec la méliode send )
+			2 : La méliode send vient d'être appelée
+			3 : Le serveur traite les informations et a commencé à renvoyer des données
+			4 : Le serveur a fini son travail, et toutes les données sont réceptionnées
 		 */
 	
 		if(xhr.readyState == 4 && xhr.status == 200){
@@ -79,3 +79,32 @@ function monAppel(text)
 	html_content += "</table>"
 	document.getElementById('demo').innerHTML = html_content;
 }
+
+function newComment_Ajax()
+{
+	alert("newComment_Ajax");
+	var xhr = getXhr();
+	var scientistId = document.getElementById("scientistId").value;
+	var ideaId = document.getElementById("ideaId").value;
+	var content = document.getElementById("content").value;
+	
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			
+			if(xhr.getResponseHeader('REQUEST_AUTH') == '2'){
+				document.location = '/sr03/client_comment.jsp';
+			}else{
+				document.location = '/sr03/client_comment.jsp';
+			}
+		
+		} 
+	}
+	
+	xhr.open("POST","http://localhost:8080/sr03/commentServlet",true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send("scientistId="+scientistId+"&ideaId="+ideaId+"&content="+content);
+	
+	alert("scientistId="+scientistId+"&ideaId="+ideaId+"&content="+content);
+}
+
