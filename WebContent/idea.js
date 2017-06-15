@@ -79,3 +79,31 @@ function monAppel(text)
 	html_content += "</table>"
 	document.getElementById('demo').innerHTML = html_content;
 }
+
+function newIdea_Ajax()
+{
+	var xhr = getXhr();
+	var title = document.getElementById("title").value;
+	var scientistId = document.getElementById("scientistId").value;
+	var domainIds = document.getElementById("domainIds").value;	
+	var content = document.getElementById("content").value;
+	var commentIds = document.getElementById("commentIds").value;
+	
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			
+			if(xhr.getResponseHeader('REQUEST_AUTH') == '2'){
+				document.location = '/sr03/client_idea.jsp';
+			}else{
+				document.location = '/sr03/client_idea.jsp';
+			}
+			
+			
+		} 
+	}
+	
+	xhr.open("POST","http://localhost:8080/sr03/ideasServlet",true);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send("title="+title+"&scientistId="+scientistId+"&domainIds="+domainIds+"&content="+content+"&commentIds="+commentIds);
+}

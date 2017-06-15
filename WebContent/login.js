@@ -45,8 +45,6 @@ function traitementAjax()
 
 function createNewAccount_Ajax()
 {
-	
-	alert("createNewAccount_Ajax///");
 	var xhr = getXhr();
 	var formType = document.getElementById("formType").value;
 	var newName = document.getElementById("newName").value;
@@ -60,19 +58,17 @@ function createNewAccount_Ajax()
 				//alert("Creation succeeded");
 				document.location = '/sr03/client_login.jsp';
 			}else{
+				alert("Creation failed");
 				document.location = '/sr03/client_login.jsp';
-				//alert("Creation failed");
+				
 			}
-			
-			
+					
 		} 
 	}
 	
 	xhr.open("POST","http://localhost:8080/sr03/AccountServlet",true);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send("formType="+formType+"&newName="+newName+"&newPassword="+newPassword+"&domain_ids="+domain_ids);
-	alert("send");
-	
 }
 
 

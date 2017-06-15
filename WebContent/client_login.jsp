@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Partage idee - login</title>
-	<link rel="stylesheet" href="/bootstrap.min.css">  
+	<link rel="stylesheet" href="bootstrap.min.css">  
 	<link rel="stylesheet" type="text/css" href="login.css">
 	<script type="text/javascript" src="cookies.js"> </script>
 	<script type="text/javascript" src="login.js"> </script>

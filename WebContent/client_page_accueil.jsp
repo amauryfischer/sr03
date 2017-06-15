@@ -97,10 +97,5 @@
 </div>
 
 
-<a href="/sr03/client_idea.jsp" class="idea" ><img class="img" src="images/idea-icon.jpg" alt=""  /></a>
-
-
-
-
 </body>
 </html>

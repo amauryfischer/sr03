@@ -71,7 +71,6 @@ public class AccountServlet extends HttpServlet {
         String user = "toto2";
         String password = "azerty";
         
-      //  PrintWriter printWriter = response.getWriter();
         
       //retrieve post params
         String reqString = getRequestPayload(request);
@@ -79,7 +78,7 @@ public class AccountServlet extends HttpServlet {
         
         //trouver des valeurs
        
-         Map<String, String> mapRequest = new HashMap<String, String>();
+        Map<String, String> mapRequest = new HashMap<String, String>();
         String[] arrSplit=null;
         arrSplit=reqString.split("[&]");
         for(String strSplit : arrSplit){
@@ -105,8 +104,7 @@ public class AccountServlet extends HttpServlet {
         String formType = mapRequest.get("formType"); 
         int nb_scientists=0;
         
-        
-       
+    
        // System.out.println("formType////:  "+formType+" >0<"); //ok
         
         try {
@@ -149,9 +147,7 @@ public class AccountServlet extends HttpServlet {
 		        	
 		        	 nb_scientists=Integer.parseInt( rs.getString(1));
 		        	 //printout
-		        	 System.out.println("avant nb scientists");
 		        	 System.out.println("nb_scientists=" + nb_scientists);
-		        	 System.out.println("apres nb scientists");
 		        	 
 		        	if(nb_scientists>0){
 		        		
