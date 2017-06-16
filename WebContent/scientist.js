@@ -63,7 +63,8 @@ function monAppel(text)
 	// header pour le tableau, permet d'afficher ttes les méthodes de l'objet
 	html_content += "<thead><tr>";
 	Object.keys(text[0]).forEach(function(attr_name) {
-		html_content += "<th>"+attr_name+"</th>";
+		if(attr_name!="idea_ids" && attr_name!="comment_ids"){
+		html_content += "<th>"+attr_name+"</th>";}
 	});
 	html_content += "</tr></thead>";
 	//body du tableau
@@ -71,7 +72,8 @@ function monAppel(text)
 	text.forEach(function(entry) {
 		html_content += "<tr>";
 		Object.keys(entry).forEach(function(attr) {
-			html_content += "<th>"+entry[attr]+"</th>";
+			if(attr!="idea_ids" && attr!="comment_ids"){
+			html_content += "<th>"+entry[attr]+"</th>";}
 		});
 	    html_content += "</tr>";
 	});

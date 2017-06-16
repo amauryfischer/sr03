@@ -126,6 +126,10 @@ public class IdeasServlet extends HttpServlet {
         	pstmt.setArray(6, domain_ids_array);
         	
 	        rs = pstmt.executeQuery();
+	        
+	        //pstmt = con.prepareStatement("UPDATE scientists SET idea_ids=? WHERE id=?");
+	        
+	        //pstmt.setInt(2, Integer.parseInt(scientist_id));
 
         } catch (SQLException ex) {
         	System.out.println(ex);
