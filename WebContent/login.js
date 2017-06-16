@@ -53,16 +53,7 @@ function createNewAccount_Ajax()
 	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-
-			if(xhr.getResponseHeader('REQUEST_AUTH') === '2'){
-				//alert("Creation succeeded");
-				document.location = '/sr03/client_login.jsp';
-			}else{
-				//alert("Creation failed");
-				document.location = '/sr03/client_login.jsp';
-				
-			}
-					
+			document.location = '/sr03/client_login.jsp';	
 		} 
 	}
 	

@@ -91,13 +91,7 @@ function newComment_Ajax()
 	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			
-			if(xhr.getResponseHeader('REQUEST_AUTH') == '2'){
-				document.location = '/sr03/client_comment.jsp';
-			}else{
-				document.location = '/sr03/client_comment.jsp';
-			}
-		
+			document.location = '/sr03/client_comment.jsp';		
 		} 
 	}
 	

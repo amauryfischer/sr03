@@ -173,8 +173,6 @@ public class AccountServlet extends HttpServlet {
 		        	}
 		        	
 		        }
-	        }else if(formType.equals("newAccount")){
-	        	response.setHeader("REQUEST_AUTH", "2"); 
 	        }
 
         } catch (SQLException ex) {

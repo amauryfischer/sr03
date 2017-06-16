@@ -95,16 +95,9 @@ function newIdea_Ajax()
 	var content = document.getElementById("content").value;
 	var commentIds = document.getElementById("commentIds").value;
 	
-	
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			
-			if(xhr.getResponseHeader('REQUEST_AUTH') == '2'){
-				document.location = '/sr03/client_idea.jsp';
-			}else{
-				document.location = '/sr03/client_idea.jsp';
-			}
-	
+			document.location = '/sr03/client_idea.jsp';
 		} 
 	}
 	

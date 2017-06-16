@@ -126,9 +126,7 @@ public class IdeasServlet extends HttpServlet {
         	pstmt.setArray(6, domain_ids_array);
         	
 	        rs = pstmt.executeQuery();
-                              
-	        response.setHeader("REQUEST_AUTH", "2");
-	        
+
         } catch (SQLException ex) {
         	System.out.println(ex);
             /*Logger lgr = Logger.getLogger(Version.class.getName());
@@ -144,7 +142,6 @@ public class IdeasServlet extends HttpServlet {
                 }
                 if (con != null) {
                     con.close();
-                    System.out.println("close");
                 }
 
             } catch (SQLException ex) {
