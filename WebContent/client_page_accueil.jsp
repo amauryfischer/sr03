@@ -13,7 +13,7 @@
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="login.css">
-  
+  <script type="text/javascript" src="login.js"> </script>
   
 </head>
 <body>
@@ -54,7 +54,7 @@
        <!--   <a class="navbar-brand" href="#">Projet SR03</a>-->
     </div>
     <div>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav ">
             
 			<li class="active"><a href="client_page_accueil.jsp">HOME</a></li>
             <li><a href="client_idea.jsp">IDEAS</a></li>
@@ -64,24 +64,10 @@
             <li><a href="client_comment.jsp">COMMENTS</a></li>
             <li><a href="comments.jsp">ADD COMMENT</a></li>
              
-          <!-- <li style="margin-left" class="navbar-right"><a href="#">Log out</a></li> -->
-          
-           <!--  <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">  
-                    Java
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">jmeter</a></li>
-                    <li><a href="#">EJB</a></li>
-                    <li><a href="#">Jasper Report</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"> </a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"> </a></li>
-                </ul>
-            </li> -->
-           </ul>
+           
+           	 <ul class="nav navbar-nav navbar-right">
+           	 	<li><a href="#" onclick="logout_Ajax();" >LOG OUT</a></li>
+           	 </ul>
     </div>
     </div>
 </nav>

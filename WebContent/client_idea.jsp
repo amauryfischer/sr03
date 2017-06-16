@@ -8,6 +8,8 @@
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" type="text/css" href="login.css">
+  <script type="text/javascript" src="login.js"> </script>
+  <script src="idea.js"></script>
   <title>IDEAS</title>
 
 </head>
@@ -59,17 +61,18 @@
             <li><a href="client_comment.jsp">COMMENTS</a></li>
             <li><a href="comments.jsp">ADD COMMENT</a></li>
              
-          <!-- <li style="margin-left" class="navbar-right"><a href="#">Log out</a></li> -->
-          
-          
            </ul>
+           
+           <ul class="nav navbar-nav navbar-right">
+           	<li><a href="#" onclick="logout_Ajax();" >LOG OUT</a></li>
+           </ul>          
     </div>
     </div>
 </nav>
 
 
 
-	<script src="idea.js"></script>
+	
 <!--  <button type="button" onclick="traitementAjax()">API meteo</button> -->
 <p id="demo"></p>
 </body>

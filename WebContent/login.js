@@ -62,4 +62,18 @@ function createNewAccount_Ajax()
 	xhr.send("formType="+formType+"&newName="+newName+"&newPassword="+newPassword+"&domain_ids="+domain_ids);
 }
 
+function logout_Ajax()
+{
+	//Partie Ajax
+	var xhr = getXhr();
+
+	xhr.onreadystatechange = function(){
+	
+		if(xhr.readyState == 4 && xhr.status == 200){
+			document.location = '/sr03/client_login.jsp';
+		} 
+	}
+	xhr.open("GET","http://localhost:8080/sr03/SessionLogout",true);
+	xhr.send(null);
+}
 

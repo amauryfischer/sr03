@@ -9,6 +9,7 @@
 	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" type="text/css" href="login.css">
+	<script type="text/javascript" src="login.js"> </script>
 	<script src="comment.js"></script>
 	
 	<title>COMMENTS</title>
@@ -70,6 +71,10 @@
 	          
 	          
 	           </ul>
+	           
+           	 <ul class="nav navbar-nav navbar-right">
+           	 	<li><a href="#" onclick="logout_Ajax();" >LOG OUT</a></li>
+           	 </ul>
 	    </div>
 	    </div>
 	</nav>

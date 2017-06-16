@@ -60,6 +60,10 @@
 		             
 		
 		           </ul>
+           	 <ul class="nav navbar-nav navbar-right">
+           	 	<li><a href="#" onclick="logout_Ajax();" >LOG OUT</a></li>
+           	 </ul>
+           	 
 		    </div>
 		    </div>
 		</nav>
